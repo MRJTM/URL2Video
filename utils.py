@@ -6,6 +6,7 @@ import json
 
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 OPENAI_BASE_URL = st.secrets["BASE_URL"]
+MODEL_NAME = st.secrets["MODEL_NAME"]
 os.environ['OPENAI_API_KEY'] =OPENAI_API_KEY
 os.environ['OPENAI_BASE_URL'] =OPENAI_BASE_URL
 

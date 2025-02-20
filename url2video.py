@@ -7,7 +7,7 @@ import requests
 
 
 if "openai_model" not in st.session_state:
-    st.session_state['openai_model']="o3-mini-2025-01-31"
+    st.session_state['openai_model']= MODEL_NAME
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
 
