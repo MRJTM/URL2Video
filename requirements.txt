@@ -1,0 +1,6 @@
+openai
+langchain-openai
+streamlit
+numpy
+python-docx
+docx2txt
