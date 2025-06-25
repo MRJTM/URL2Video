@@ -2,11 +2,11 @@ import os
 import json
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ai_tools.text2text import *
+from ai_tools.story_tools import *
 from tqdm import tqdm
 from openai import OpenAI
 
-def translate_a_chapter(content="",model='gpt'):
+def translate_a_chapter(content="",model_name='gpt-o3-mini'):
     lines=content.split('\n')
     paragraph=[]
     # 每1000个字为一个段落
@@ -14,10 +14,6 @@ def translate_a_chapter(content="",model='gpt'):
     translate_res=[]
     all_success=True
     valid_line_num=0
-    if 'deepseek' in model:
-        model_name = 'deepseek-chat'
-    else:
-        model_name = None
 
     for line in lines:
         if len(line)<=4:

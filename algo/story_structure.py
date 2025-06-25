@@ -2,7 +2,7 @@ import os
 import json
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ai_tools.text2text import *
+from ai_tools.story_tools import *
 from tqdm import tqdm
 
 def run_one_case():

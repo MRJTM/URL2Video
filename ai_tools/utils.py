@@ -1,21 +1,12 @@
-import streamlit as st
-import os
-import openai
-from openai import OpenAI
 from docx import Document
 import json
-import requests
-import base64
-import numpy as np
-from io import BytesIO
 from PIL import Image,ImageFont,ImageDraw
-import wget
+from openai import OpenAI
+from config.model_api import *
 
 persist_directory='text_persist'
 collection_name='text_collection'
 
-# model_name="gpt-4o-mini-2024-07-18"
-# model_name='o1-mini-2024-09-12'
 
 def load_file(file_path):
     doc = Document(file_path)

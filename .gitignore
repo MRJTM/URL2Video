@@ -7,3 +7,4 @@ tmp_materials
 test.py
 out
 .DS_Store
+config/model_api.py
