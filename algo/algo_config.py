@@ -4,6 +4,6 @@ algo_configs={
         "prompt_type":"structure_parse"
     },
     "story_translate":{
-        "model":"deepseek",
+        "model":"deepseek-v3-apicore",
     },
 }

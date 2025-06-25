@@ -32,14 +32,14 @@ def process(process_idx, pairs, res_file_prefix, algo_name):
 
 
 if __name__ == '__main__':
-    algo_name = "story_structure"
-    # algo_name = "story_translate"
-    num_process = 8
-    test_num = -1
+    # algo_name = "story_structure"
+    algo_name = "story_translate"
+    num_process = 2
+    test_num = 4
 
     # data prepare,解读测试文件，生成pairs的list
-    test_file_path = "../../data/中文女频2023-24/story.json"
-    # test_file_path = "../../data/中文女频2023-24/story_structure_res.json"
+    # test_file_path = "../../data/中文女频2023-24/story.json"
+    test_file_path = "../../data/中文女频2023-24/story_structure_res.json"
 
 
     pairs, res_file_prefix = parse_test_file(test_file_path, algo_name, test_num)

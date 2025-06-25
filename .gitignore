@@ -4,7 +4,8 @@ __pycache__/
 tmp_materials/tmp_images
 tmp_materials/tmp_audios
 tmp_materials
-test.py
+test/test_openai_api.py
 out
 .DS_Store
 config/model_api.py
+test
