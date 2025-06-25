@@ -1,0 +1,9 @@
+algo_configs={
+    "story_parse":{
+        "model":"gpt",
+        "prompt_type":"structure_parse"
+    },
+    "story_translate":{
+        "model":"deepseek",
+    },
+}

@@ -1,3 +1,9 @@
 .idea
 .streamlit
 __pycache__/
+tmp_materials/tmp_images
+tmp_materials/tmp_audios
+tmp_materials
+test.py
+out
+.DS_Store
