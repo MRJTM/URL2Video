@@ -6,4 +6,8 @@ algo_configs={
     "story_translate":{
         "model":"deepseek-v3-apicore",
     },
+    "story_quality_eval":{
+        "model":"deepseek-v3-apicore",
+        "prompt_type":"story_quality_eval"
+    },
 }

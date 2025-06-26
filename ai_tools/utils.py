@@ -21,15 +21,24 @@ def load_file(file_path):
 
 def parse_json_response(response,skip_blank=True):
     raw_res=response
-    print("raw_res:",raw_res)
-    if "```json" in raw_res and "```" in raw_res:
-        res = raw_res.split("```json")[1].split("```")[0]
-    else:
-        res = raw_res
-    res = res.replace('\n', '')
-    if skip_blank:
-        res=res.replace(' ','')
-    res = json.loads(res, strict=False)
+    try:
+        if "```json" in raw_res and "```" in raw_res:
+            res = raw_res.split("```json")[1].split("```")[0]
+        else:
+            res = raw_res
+        res = res.replace('\n', '')
+        if skip_blank:
+            res=res.replace(' ','')
+        # 找到第一个{和最后一个}
+        first_brace = res.find('{')
+        last_brace = res.rfind('}')
+        # 如果找到了{和}，则截取这部分内容
+        if first_brace != -1 and last_brace != -1:
+            res = res[first_brace:last_brace + 1]
+        res = json.loads(res, strict=False)
+    except Exception as e:
+        print("Json parse Error:{} for raw_res:{}".format(e,raw_res))
+        res = {}
     return res
 
 def compute_resolution(resolution,ratio):
