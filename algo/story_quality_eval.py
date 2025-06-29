@@ -1,11 +1,25 @@
 import os
 import json
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ai_tools.story_tools import *
 from tqdm import tqdm
-from openai import OpenAI
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from ai_tools.text2text import text2text
+from ai_tools.utils import parse_json_response
+
+def story_quality_eval(story="",model_name=None,prompt_type='story_quality_eval',fake=False):
+    fake_res={
+        "分数":100,
+        "理由":""
+    }
+    if fake:
+        return fake_res
+    prompt_path= 'prompts/prompt_{}.txt'.format(prompt_type)
+    prompt_tmp=open(prompt_path).read()
+    prompt=prompt_tmp.replace('aaaaa',story)
+    raw_res=text2text(prompt,model_name=model_name)
+    res=parse_json_response(raw_res)
+    return res
 def run_one_case():
     test_file_path='tmp_materials/tmp_storys/首席混混总裁夫人.json'
     structure_res=json.loads(open(test_file_path,'r').read())

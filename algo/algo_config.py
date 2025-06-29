@@ -10,4 +10,8 @@ algo_configs={
         "model":"deepseek-v3-apicore",
         "prompt_type":"story_quality_eval"
     },
+    "story_character_parse":{
+        "model":"deepseek-v3-apicore",
+        "prompt_type":"story_character_parse"
+    }
 }

@@ -1,3 +1,6 @@
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ai_tools.utils import *
 import http.client
 
@@ -46,15 +49,22 @@ def text2text(prompt='',model_name=None,stream=False):
             'Authorization': 'Bearer {}'.format(api_key),
             'Content-Type': 'application/json'
         }
-        conn.request("POST", "/v1/chat/completions", payload, headers)
-        res = conn.getresponse()
-        data = res.read()
-        if stream:
-            return data
-        else:
-            try:
+        try:
+            conn.request("POST", "/v1/chat/completions", payload, headers)
+            res = conn.getresponse()
+            data = res.read()
+            if stream:
+                return data
+            else:
                 res=data.decode("utf-8")
                 res=json.loads(res)['choices'][0]['message']['content']
-            except:
-                res=""
+                return res
+        except Exception as e:
+            print("call llm error:{} for full_model_name:{}".format(e,full_model_name))
+            res=""
             return res
+
+if __name__=='__main__':
+    prompt="你好"
+    res=text2text(prompt,model_name='deepseek-v3-apicore',stream=False)
+    print(res)

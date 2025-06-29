@@ -1,10 +1,33 @@
 import os
 import json
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ai_tools.story_tools import *
 from tqdm import tqdm
-from openai import OpenAI
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from ai_tools.text2text import text2text
+
+def translate_a_paragragh(story="",target_language='英语',model_name=None,fake=False):
+    fake_res={
+        "英语":""
+    }
+    if fake:
+        return fake_res.get(target_language,'')
+    prompt_path= 'prompts/prompt_story_translate.txt'
+    prompt_tmp=open(prompt_path).read()
+    prompt=prompt_tmp.replace('aaaaa',story).replace('bbbbb',target_language)
+    raw_res=text2text(prompt,model_name=model_name)
+    if '翻译结果为:' in raw_res:
+        res=raw_res.split("翻译结果为:")[-1]
+    elif '翻译结果为：' in raw_res:
+        res=raw_res.split("翻译结果为：")[-1]
+    elif '翻译结果为' in raw_res:
+        res=raw_res.split("翻译结果为")[-1]
+    elif 'Translation result:' in raw_res:
+        res=raw_res.split("Translation result:")[-1]
+    elif 'Translation result：' in raw_res:
+        res=raw_res.split("Translation result：")[-1]
+    else:
+        res=raw_res
+    return res
 
 def translate_a_chapter(content="",model_name='gpt-o3-mini'):
     lines=content.split('\n')
