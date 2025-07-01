@@ -5,7 +5,7 @@ from multiprocessing import Pool
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from algo.algo_config import algo_configs
 from algo import story_structure,story_translate,story_quality_eval
-from algo import story_character_parse
+from algo import story_character_parse,story_character_rename
 import random
 
 
@@ -19,6 +19,9 @@ def parse_test_file(test_file_path, algo_name, test_num=-1):
                                                                    algo_configs[algo_name]['prompt_type'])
     elif algo_name == "story_character_parse":
         pairs, res_file_prefix = story_character_parse.parse_test_file(test_file_path, algo_configs[algo_name]['model'],
+                                                                   algo_configs[algo_name]['prompt_type'])
+    elif algo_name == "story_character_rename":
+        pairs, res_file_prefix = story_character_rename.parse_test_file(test_file_path, algo_configs[algo_name]['model'],
                                                                    algo_configs[algo_name]['prompt_type'])
     else:
         raise NotImplementedError
@@ -38,6 +41,9 @@ def process(process_idx, pairs, res_file_prefix, algo_name):
     elif algo_name == "story_character_parse":
         res_dict = story_character_parse.do_story_character_parse(pairs, res_file_prefix, process_idx,
                                                             algo_configs[algo_name]['model'],algo_configs[algo_name]['prompt_type'])
+    elif algo_name == "story_character_rename":
+        res_dict = story_character_rename.do_story_character_rename(pairs, res_file_prefix, process_idx,
+                                                            algo_configs[algo_name]['model'],algo_configs[algo_name]['prompt_type'])
     else:
         raise NotImplementedError
 
@@ -49,6 +55,7 @@ if __name__ == '__main__':
     # algo_name = "story_translate"
     # algo_name = "story_quality_eval"
     algo_name = "story_character_parse"
+    # algo_name = "story_character_rename"
     num_process = 2
     test_num = 2
 

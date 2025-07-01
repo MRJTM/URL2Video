@@ -13,5 +13,9 @@ algo_configs={
     "story_character_parse":{
         "model":"deepseek-v3-apicore",
         "prompt_type":"story_character_parse"
+    },
+    "story_character_rename":{
+        "model":"deepseek-v3-apicore",
+        "prompt_type":"story_character_rename"
     }
 }
