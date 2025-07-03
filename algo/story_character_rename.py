@@ -21,7 +21,7 @@ def rename_character(character_info={},model_name='gpt',prompt_type='rename_char
 
 def run_one_case():
     test_file_path='../../data/中文女频2023-24/deepseek-v3-apicore_story_character_parse_res/冷情总裁的退婚新娘_final.json'
-    charactor_res=json.loads(open(test_file_path,'r').read())
+    raw_charactor_res=json.loads(open(test_file_path,'r').read())
     model_name='deepseek-v3-apicore-my'
     prompt_type='story_character_rename'
     res_folder_path='../../data/中文女频2023-24/{}_{}_res'.format(model_name,prompt_type)
@@ -29,11 +29,15 @@ def run_one_case():
     story_name=test_file_path.split('/')[-1].split('.')[0]
     res_file_prefix=res_folder_path+'/'+story_name
     print("res_file_prefix:",res_file_prefix)
-    new_charactor_res=rename_character(charactor_res,model_name=model_name,prompt_type=prompt_type)
+    new_charactor_res=rename_character(raw_charactor_res,model_name=model_name,prompt_type=prompt_type)
     print("new_charactor_res:",new_charactor_res)
+    for char_name in raw_charactor_res.keys():
+        name_en=new_charactor_res.get(char_name,{}).get('英文名',"")
+        raw_charactor_res[char_name]['英文名']=name_en
+
     dst_file_path=res_file_prefix+'.json'
     with open(dst_file_path,'w') as f:
-        json.dump(new_charactor_res,f,ensure_ascii=False,indent=4)
+        json.dump(raw_charactor_res,f,ensure_ascii=False,indent=4)
 
 def parse_test_file(fname,model_name='gpt',prompt_type='story_character_rename'):
     src_dict = json.loads(open(fname, 'r').read())
